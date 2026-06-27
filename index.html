@@ -498,7 +498,7 @@ function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a
      si el sprite queda "flotando" o "hundido" en el suelo.
    · Mateo se ANIMA al caminar: pon VARIAS imágenes por dirección (un arreglo) y
      se reproducen en bucle al moverse. `fps` controla la velocidad de la animación.
-       down: ['mateo_abajo_1.png','mateo_abajo_2.png','mateo_abajo_3.png']
+       down: ['mateo_abajo_1.webp','mateo_abajo_2.webp','mateo_abajo_3.webp']
    · `icon` (inventario y tarjeta de dato) admite EMOJI o RUTA de imagen. Si lo
      dejas vacío, se usa automáticamente el `sprite` del objeto como ícono.
    · banners = imagen que aparece al iniciar cada zona (puesto SERFOR).
@@ -508,19 +508,19 @@ const ASSETS = {
   mateo: { down:null, up:null, left:null, right:null, height:58, anchorY:0.86, fps:8, scale:1.75 },
 
   // --- Casa / puesto de control de SERFOR ---
-  serfor: { src:"src/img/serfor.png", height:80, anchorY:0.82 },
+  serfor: { src:"src/img/serfor.webp", height:80, anchorY:0.82 },
 
   // --- Imagen de la PANTALLA DE HISTORIA / misión ---
-  story: { src:"src/img/bosque.png" },
+  story: { src:"src/img/bosque.webp" },
 
   // --- Imagen del BANNER de zona (aparece al entrar a cada puesto SERFOR) ---
-  banners: { bayovar:"src/img/bayovar.png", matanza:"src/img/matanza.png" },
+  banners: { bayovar:"src/img/bayovar.webp", matanza:"src/img/matanza.webp" },
 
   // --- Personaje GUÍA / JEFE (abajo a la derecha, te da pistas). Imagen + nombre ---
-  guide: { src:"src/img/cap.png", name:'Cap. Ruiz' },
+  guide: { src:"src/img/cap.webp", name:'Cap. Ruiz' },
 
   // --- Imagen de la HISTORIA FINAL (epílogo al terminar el juego) ---
-  outro: { src:"src/img/end.png" },
+  outro: { src:"src/img/end.webp" },
 
   // --- MÚSICA DE FONDO (mp3): pon la ruta de tu archivo y suena en bucle ---
   music: { src:"src/msc/fondo.mp3", volume:0.3 },
@@ -540,12 +540,12 @@ const ASSETS = {
 
   // --- Los 6 recolectables: sprite en el mundo + icono del inventario ---
   collectibles: {
-    log:      { sprite:"src/img/log.png",      icon:'', height:20,  anchorY:0.58 }, // tronco con anillos
-    pods:     { sprite:"src/img/pods.png",     icon:'', height:52,  anchorY:0.50 }, // vainas
-    chainsaw: { sprite:"src/img/chainsaw.png", icon:'', height:68,  anchorY:0.62 }, // motosierra
-    charcoal: { sprite:"src/img/charcoal.png", icon:'', height:40,  anchorY:0.72 }, // sacos de carbón
-    deadtree: { sprite:"src/img/deadtree.png", icon:'', height:124, anchorY:0.90 }, // árbol seco con nido
-    tracks:   { sprite:"src/img/tracks.png",   icon:'', height:66,  anchorY:0.50 }, // huellas / arrastre
+    log:      { sprite:"src/img/log.webp",      icon:'', height:20,  anchorY:0.58 }, // tronco con anillos
+    pods:     { sprite:"src/img/pods.webp",     icon:'', height:52,  anchorY:0.50 }, // vainas
+    chainsaw: { sprite:"src/img/chainsaw.webp", icon:'', height:68,  anchorY:0.62 }, // motosierra
+    charcoal: { sprite:"src/img/charcoal.webp", icon:'', height:40,  anchorY:0.72 }, // sacos de carbón
+    deadtree: { sprite:"src/img/deadtree.webp", icon:'', height:124, anchorY:0.90 }, // árbol seco con nido
+    tracks:   { sprite:"src/img/tracks.webp",   icon:'', height:66,  anchorY:0.50 }, // huellas / arrastre
   }
 };
 
