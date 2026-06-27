@@ -19,16 +19,16 @@
 
   /* ============ HUD ============ */
   .hud{position:absolute; pointer-events:none; z-index:5;}
-  #obj{top:14px; left:14px; max-width:min(58vw,360px);}
+  #obj{top:14px; left:14px; max-width:min(66vw,430px); padding:16px 19px;}
   .panel{
     background:linear-gradient(180deg, rgba(36,26,18,.82), rgba(36,26,18,.66));
     border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:11px 13px;
     backdrop-filter:blur(7px); box-shadow:0 8px 24px rgba(0,0,0,.35);
   }
-  .eyebrow{font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--radar); opacity:.92;}
-  #loc{font-weight:700; font-size:15px; line-height:1.18; margin-top:3px; color:#fff;}
-  #ev{font-family:'Space Mono',monospace; font-size:12px; margin-top:8px; color:#f2dcc0;}
-  #hint{font-size:11.5px; margin-top:5px; color:#e8c9a0; opacity:.95;}
+  .eyebrow{font-family:'Space Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--radar); opacity:.95;}
+  #loc{font-weight:700; font-size:20px; line-height:1.18; margin-top:5px; color:#fff;}
+  #ev{font-family:'Space Mono',monospace; font-size:14.5px; margin-top:11px; color:#f2dcc0;}
+  #hint{font-size:13.5px; margin-top:7px; color:#e8c9a0; opacity:.95;}
 
   #radarWrap{top:14px; right:14px; display:flex; flex-direction:column; align-items:center; gap:6px;}
   #radar{width:108px; height:108px; border-radius:50%; display:block;
@@ -197,9 +197,62 @@
   #locBanner .lbTitle{font-family:'Anton',sans-serif; font-weight:400; font-size:21px; letter-spacing:.01em; color:#fff; line-height:1.05; margin-top:2px;}
   #locBanner .lbSub{font-size:12px; color:#f1d9bf; margin-top:1px;}
 
+  /* ============ herramientas / ajustes ============ */
+  #tools{position:absolute; right:16px; top:158px; z-index:7; display:none; flex-direction:column; gap:9px; pointer-events:none;}
+  #tools.on{display:flex;}
+  .toolbtn{pointer-events:auto; width:46px; height:46px; border-radius:13px; cursor:pointer; font-size:21px; padding:0;
+    background:linear-gradient(180deg, rgba(36,26,18,.86), rgba(36,26,18,.7)); color:#fff;
+    border:1px solid rgba(255,255,255,.16); box-shadow:0 6px 18px rgba(0,0,0,.4); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center;}
+  .toolbtn:active{transform:scale(.93);}
+  #settings{position:absolute; right:72px; top:158px; z-index:8; pointer-events:none;}
+  #settings.hide{display:none;}
+  .setPanel{pointer-events:auto; width:236px; background:linear-gradient(180deg,rgba(36,26,18,.95),rgba(36,26,18,.88));
+    border:1px solid rgba(255,255,255,.16); border-radius:14px; padding:14px 15px; box-shadow:0 16px 36px rgba(0,0,0,.55); backdrop-filter:blur(8px);}
+  .setTitle{font-family:'Anton',sans-serif; font-weight:400; font-size:18px; color:#fff; margin-bottom:8px; letter-spacing:.02em;}
+  .setRow{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:11px 0; font-size:13.5px; color:#f1d9bf;}
+  .setRow input[type=range]{width:96px; accent-color:var(--radar);}
+  .sw{position:relative; width:44px; height:24px; border-radius:14px; border:none; cursor:pointer; flex:0 0 auto; background:#5a4a3a; transition:background .2s;}
+  .sw.on{background:var(--serfor);}
+  .sw::after{content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .sw.on::after{left:23px;}
+
+  /* ============ cartel de tarea (volver a SERFOR) ============ */
+  #taskToast{position:absolute; top:84px; left:50%; transform:translate(-50%,-8px); z-index:9; opacity:0; pointer-events:none;
+    display:flex; align-items:center; gap:8px; max-width:min(88vw,440px); text-align:left;
+    background:linear-gradient(180deg, rgba(232,116,59,.96), rgba(196,86,38,.94)); color:#fff;
+    border:1px solid rgba(255,255,255,.3); border-radius:14px; padding:11px 16px; font-weight:600; font-size:14.5px;
+    box-shadow:0 12px 30px rgba(0,0,0,.45); transition:opacity .5s ease, transform .5s ease;}
+  #taskToast.show{opacity:1; transform:translate(-50%,0);}
+  #taskToast::before{content:"📍"; font-size:18px;}
+
+  /* ============ aviso de aturdimiento ============ */
+  #stun{position:absolute; top:48%; left:50%; transform:translate(-50%,-50%) scale(.9); z-index:12; opacity:0; pointer-events:none;
+    background:rgba(48,18,16,.92); color:#ffe6c8; border:1px solid rgba(255,120,90,.55); border-radius:16px;
+    padding:16px 24px; font-weight:700; font-size:16px; text-align:center; box-shadow:0 16px 40px rgba(0,0,0,.55);
+    transition:opacity .25s ease, transform .25s ease;}
+  #stun.show{opacity:1; transform:translate(-50%,-50%) scale(1);}
+  #stun .big{font-size:34px; display:block; margin-bottom:4px;}
+
+  /* ============ expediente / colección ============ */
+  #collection{background:rgba(12,8,5,.62); backdrop-filter:blur(2px);}
+  .colCard{width:min(560px,100%); max-height:92vh; overflow:auto;
+    background:linear-gradient(180deg,rgba(38,28,18,.97),rgba(28,20,14,.97));
+    border:1px solid rgba(255,255,255,.14); border-radius:20px; padding:22px; box-shadow:0 24px 60px rgba(0,0,0,.6);}
+  .colGrid{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin:16px 0;}
+  .colItem{background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:12px; opacity:.5;}
+  .colItem.got{opacity:1; border-color:rgba(127,232,192,.4); background:rgba(46,107,79,.25);}
+  .colItem .colIcon{font-size:30px; height:38px; line-height:38px;}
+  .colItem .colIcon img{width:34px; height:34px; object-fit:contain; vertical-align:middle;}
+  .colName{font-weight:700; color:#fff; font-size:14px; margin:4px 0 3px;}
+  .colTxt{font-size:11.5px; line-height:1.42; color:#e8c9a0;}
+
   @media (max-width:520px){
+    #tools{top:130px;} #settings{top:130px; right:70px;}
+    .colGrid{grid-template-columns:1fr;}
     #radar{width:88px;height:88px;} #sig{width:88px;}
-    #obj{max-width:54vw;}
+    #obj{max-width:62vw; padding:13px 15px;}
+    #loc{font-size:17px;} #ev{font-size:13px;} .eyebrow{font-size:11px;} #hint{font-size:12px;}
     .slot{width:42px;height:42px;font-size:21px;}
   }
   @media (prefers-reduced-motion: reduce){ .ring{animation:none;} }
@@ -254,6 +307,26 @@
     </button>
   </div>
 
+  <!-- barra de herramientas: expediente de pruebas + ajustes -->
+  <div class="hud" id="tools">
+    <button class="toolbtn" id="btnCollection" title="Pruebas recolectadas">📋</button>
+    <button class="toolbtn" id="btnSettings" title="Ajustes de sonido">⚙️</button>
+  </div>
+  <div class="hud hide" id="settings">
+    <div class="setPanel">
+      <div class="setTitle">Ajustes</div>
+      <div class="setRow"><span>Música</span><button class="sw on" id="swMusic" role="switch" aria-checked="true"></button></div>
+      <div class="setRow"><span>Efectos (radar, etc.)</span><button class="sw on" id="swSfx" role="switch" aria-checked="true"></button></div>
+      <div class="setRow"><span>Volumen música</span><input id="volMusic" type="range" min="0" max="100" value="50"></div>
+    </div>
+  </div>
+
+  <!-- cartel: vuelve a SERFOR (se elimina con el tiempo) -->
+  <div id="taskToast"><span id="taskToastText">Vuelve al puesto SERFOR a entregar las pruebas</span></div>
+
+  <!-- aviso de animal -->
+  <div id="stun"><span class="big">😵</span><span class="txt">¡Un animal te dejó inconsciente!</span></div>
+
   <!-- mobile -->
   <div id="pad">
     <div class="dbtn" id="up">▲</div>
@@ -307,6 +380,7 @@
         <div class="storyph" id="storyPh">
           <div class="phicon">🌄</div>
           <div class="phtxt">Imagen de la historia</div>
+          <div class="phsub">Reemplázala en <b>ASSETS.story.src</b></div>
         </div>
       </div>
       <h2 class="storytitle">La misión</h2>
@@ -371,12 +445,24 @@
         <div class="storyph" id="outroPh">
           <div class="phicon">🌅</div>
           <div class="phtxt">Imagen del final</div>
+          <div class="phsub">Reemplázala en <b>ASSETS.outro.src</b></div>
         </div>
       </div>
       <h2 class="storytitle">Amanece de nuevo</h2>
       <p class="storytext">Con las pruebas en regla, <b>SERFOR</b> abrió la investigación. El tronco talado, las vainas, la motosierra y los sacos de carbón cuentan, juntos, la historia del delito.</p>
       <p class="storytext">Mateo vuelve al patrullaje con el siguiente amanecer. El <b>bosque seco</b> sigue en pie: con cada guardabosques voluntario, Sechura y Morropón recuperan su sombra, su agua y su vida.</p>
       <div class="btnrow"><button class="btn" id="btnOutroGo">Ver resultado</button></div>
+    </div>
+  </div>
+
+  <!-- COLECCIÓN / EXPEDIENTE DE PRUEBAS -->
+  <div class="screen hide" id="collection">
+    <div class="colCard">
+      <span class="badge">Expediente de pruebas</span>
+      <h2 class="storytitle" style="text-align:center; margin:8px 0 0">Pruebas recolectadas</h2>
+      <p style="text-align:center; font-size:13px; color:#e8c9a0; margin-top:4px">Toda la evidencia que has reunido en la operación.</p>
+      <div class="colGrid" id="colGrid"></div>
+      <div class="btnrow" style="justify-content:center"><button class="btn" id="btnColClose">Cerrar</button></div>
     </div>
   </div>
 </div>
@@ -419,7 +505,7 @@ function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a
    ========================================================================= */
 const ASSETS = {
   // --- Personaje Mateo: varias imágenes por dirección = animación de caminar ---
-  mateo: { down:null, up:null, left:null, right:null, height:58, anchorY:0.86, fps:8 },
+  mateo: { down:null, up:null, left:null, right:null, height:58, anchorY:0.86, fps:8, scale:1.75 },
 
   // --- Casa / puesto de control de SERFOR ---
   serfor: { src:"src/img/serfor.png", height:80, anchorY:0.82 },
@@ -435,6 +521,22 @@ const ASSETS = {
 
   // --- Imagen de la HISTORIA FINAL (epílogo al terminar el juego) ---
   outro: { src:"src/img/end.png" },
+
+  // --- MÚSICA DE FONDO (mp3): pon la ruta de tu archivo y suena en bucle ---
+  music: { src:"src/msc/fondo.mp3", volume:0.3 },
+
+  // --- ANIMALES que pueden atraparte y dejarte inconsciente unos segundos ---
+  //   count = total por zona (en el bosque hay algunos más).
+  //   Cada tipo: src imagen opcional, speed velocidad, stun segundos que quedas KO,
+  //   reach distancia para atraparte, sight alcance al que te persigue, weight frecuencia.
+  animals: {
+    count: 11,
+    types: [
+      { name:'sajino', draw:'boar', src:null, height:48, anchorY:0.62, speed:46,  stun:3.6, reach:30, sight:185, weight:2 }, // lento: te deja KO más tiempo
+      { name:'zorro',  draw:'fox',  src:null, height:42, anchorY:0.62, speed:80,  stun:2.4, reach:26, sight:240, weight:3 }, // medio
+      { name:'perro',  draw:'dog',  src:null, height:44, anchorY:0.62, speed:120, stun:1.7, reach:24, sight:300, weight:2 }, // rápido
+    ]
+  },
 
   // --- Los 6 recolectables: sprite en el mundo + icono del inventario ---
   collectibles: {
@@ -487,9 +589,11 @@ function iconHTML(type){
 const SPR = {
   mateo:{ down:toFrames(ASSETS.mateo.down), up:toFrames(ASSETS.mateo.up), left:toFrames(ASSETS.mateo.left), right:toFrames(ASSETS.mateo.right) },
   serfor: loadImg(ASSETS.serfor.src),
+  animal: null,
   world:{}
 };
 for(const k in ASSETS.collectibles){ SPR.world[k]=loadImg(ASSETS.collectibles[k].sprite); }
+if(ASSETS.animals && ASSETS.animals.types){ for(const tp of ASSETS.animals.types){ tp.img = loadImg(tp.src); } }
 
 /* ---------- object metadata (the 6) ---------- */
 const INFO = {
@@ -516,35 +620,48 @@ const INFO = {
 /* ---------- level design ---------- */
 const LEVELS = [
   { tag:'Nivel 1 / 3 · Operativo SERFOR', loc:'Desierto de Sechura', post:'Puesto SERFOR · Bayóvar',
-    biome:'desert', w:2400, h:1800, seed:101, bannerKey:'bayovar',
-    start:{x:300,y:1500}, serfor:{x:300,y:1500},
-    objects:[{type:'log',x:1850,y:560},{type:'chainsaw',x:1100,y:1250}] },
+    biome:'desert', w:3000, h:2100, seed:101, bannerKey:'bayovar',
+    start:{x:360,y:1740}, serfor:{x:360,y:1740},
+    objects:[{type:'log',x:2600,y:460},{type:'chainsaw',x:1650,y:1300}] },
   { tag:'Nivel 2 / 3 · Operativo SERFOR', loc:'Desierto de Sechura', post:'Puesto SERFOR · Bayóvar',
-    biome:'desert', w:2600, h:1900, seed:202, bannerKey:'bayovar',
-    start:{x:340,y:340}, serfor:{x:340,y:340},
-    objects:[{type:'pods',x:1500,y:1500},{type:'charcoal',x:2200,y:560}] },
+    biome:'desert', w:3000, h:2300, seed:202, bannerKey:'bayovar',
+    start:{x:380,y:380}, serfor:{x:380,y:380},
+    objects:[{type:'charcoal',x:2600,y:520},{type:'pods',x:2400,y:2000}] },
   { tag:'Nivel 3 / 3 · Operativo SERFOR', loc:'Bosque seco de Morropón', post:'Puesto SERFOR · La Matanza',
-    biome:'forest', w:2600, h:2000, seed:303, bannerKey:'matanza',
-    start:{x:330,y:1660}, serfor:{x:330,y:1660},
-    objects:[{type:'deadtree',x:2150,y:520},{type:'tracks',x:1250,y:1150}] },
+    biome:'forest', w:3000, h:2400, seed:303, bannerKey:'matanza',
+    start:{x:380,y:2040}, serfor:{x:380,y:2040},
+    objects:[{type:'deadtree',x:2600,y:460},{type:'tracks',x:1500,y:1250}] },
 ];
 
 /* ---------- game state ---------- */
 const G = {
   state:'menu', lvlIndex:0, level:null,
   player:{x:0,y:0,dir:'down',vx:0,vy:0,walk:0,moving:false},
-  cam:{x:0,y:0}, ground:null, decor:[], objects:[], serfor:null,
+  cam:{x:0,y:0}, ground:null, decor:[], colliders:[], mud:[], objects:[], serfor:null,
   collected:0, lastTime:0, pulsePhase:0, beepAcc:0, sweep:0, time:0,
   guideIdle:0, tipi:0, lastGuideMsg:'',
+  animals:[], log:[], stunUntil:0, invulnUntil:0, taskShown:false,
 };
 const keys={};
 const move={up:false,down:false,left:false,right:false,act:false};
 
 /* ---------- audio ---------- */
-let AC=null;
-function ensureAudio(){ if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } if(AC&&AC.state==='suspended') AC.resume(); }
+let AC=null, sfxOn=true, musicOn=true, bgMusic=null;
+function setupMusic(){
+  if(ASSETS.music && ASSETS.music.src && !bgMusic){
+    bgMusic=new Audio(ASSETS.music.src);
+    bgMusic.loop=true; bgMusic.volume=(ASSETS.music.volume!=null?ASSETS.music.volume:0.5);
+  }
+}
+function playMusic(){ if(bgMusic && musicOn){ bgMusic.play().catch(()=>{}); } }
+function pauseMusic(){ if(bgMusic){ bgMusic.pause(); } }
+function ensureAudio(){
+  if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} }
+  if(AC&&AC.state==='suspended') AC.resume();
+  setupMusic(); playMusic();
+}
 function beep(freq,dur,vol,type){
-  if(!AC) return;
+  if(!AC || !sfxOn) return;
   const o=AC.createOscillator(), g=AC.createGain();
   o.type=type||'sine'; o.frequency.value=freq;
   g.gain.value=0; o.connect(g); g.connect(AC.destination);
@@ -553,8 +670,8 @@ function beep(freq,dur,vol,type){
   g.gain.exponentialRampToValueAtTime(0.0001, t+(dur||0.1));
   o.start(t); o.stop(t+(dur||0.1)+0.02);
 }
-function chime(){ if(!AC)return; [523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,0.18,0.06,'triangle'),i*70)); }
-function fanfare(){ if(!AC)return; [392,523,659,784,1046,1318].forEach((f,i)=>setTimeout(()=>beep(f,0.22,0.06,'triangle'),i*110)); }
+function chime(){ if(!AC||!sfxOn)return; [523,659,784,1046].forEach((f,i)=>setTimeout(()=>beep(f,0.18,0.06,'triangle'),i*70)); }
+function fanfare(){ if(!AC||!sfxOn)return; [392,523,659,784,1046,1318].forEach((f,i)=>setTimeout(()=>beep(f,0.22,0.06,'triangle'),i*110)); }
 
 /* ============================================================
    LEVEL BUILD
@@ -569,6 +686,8 @@ function buildLevel(idx){
   G.cam.y = clamp(G.player.y - VH/2, 0, L.h-VH);
   buildGround(L);
   buildDecor(L);
+  buildAnimals(L);
+  G.stunUntil=0; G.invulnUntil=0; G.taskShown=false;
   // HUD
   document.getElementById('lvltag').textContent = L.tag;
   document.getElementById('loc').textContent = L.loc + ' · ' + L.post;
@@ -593,51 +712,119 @@ function buildGround(L){
   const g=document.createElement('canvas'); g.width=L.w; g.height=L.h;
   const c=g.getContext('2d');
   const forest = L.biome==='forest';
+  const r=mulberry32(L.seed*7+1);
   // base gradient (warm dawn light from lower-left)
   const base=c.createLinearGradient(0,0,L.w,L.h);
-  if(forest){ base.addColorStop(0,'#c9b87f'); base.addColorStop(.5,'#d9c389'); base.addColorStop(1,'#b89a5c'); }
-  else { base.addColorStop(0,'#e3c397'); base.addColorStop(.5,'#e8c9a0'); base.addColorStop(1,'#cda06a'); }
+  if(forest){ base.addColorStop(0,'#c7b478'); base.addColorStop(.5,'#d6bf84'); base.addColorStop(1,'#b2945a'); }
+  else { base.addColorStop(0,'#e1c094'); base.addColorStop(.5,'#e6c79e'); base.addColorStop(1,'#c89c66'); }
   c.fillStyle=base; c.fillRect(0,0,L.w,L.h);
+  // large soft tone patches (sand variation -> realism)
+  for(let i=0;i<L.w*L.h/26000;i++){
+    const x=r()*L.w, y=r()*L.h, rad=120+r()*260;
+    const warm=r()>0.5;
+    const col = forest
+      ? (warm?'rgba(150,130,70,':'rgba(120,150,80,')
+      : (warm?'rgba(210,165,110,':'rgba(150,110,70,');
+    const gr=c.createRadialGradient(x,y,0,x,y,rad);
+    gr.addColorStop(0, col+(0.10+r()*0.08)+')'); gr.addColorStop(1, col+'0)');
+    c.fillStyle=gr; c.beginPath(); c.arc(x,y,rad,0,7); c.fill();
+  }
   // dawn warm wash lower-left
   const dl=c.createRadialGradient(0,L.h,0, 0,L.h, Math.max(L.w,L.h));
-  dl.addColorStop(0,'rgba(243,166,90,.30)'); dl.addColorStop(.5,'rgba(243,166,90,.10)'); dl.addColorStop(1,'rgba(243,166,90,0)');
+  dl.addColorStop(0,'rgba(243,166,90,.28)'); dl.addColorStop(.5,'rgba(243,166,90,.09)'); dl.addColorStop(1,'rgba(243,166,90,0)');
   c.fillStyle=dl; c.fillRect(0,0,L.w,L.h);
-  // dune ridges (sine bands)
-  const r=mulberry32(L.seed*7+1);
-  const ridges = forest?7:11;
+  // dune ridges (sine bands) with trough shadow + crest light
+  const ridges = forest?8:13;
   for(let i=0;i<ridges;i++){
     const yc = (i+0.5)/ridges*L.h + (r()-0.5)*120;
-    const amp = 60+r()*120, wl = 380+r()*420, ph=r()*Math.PI*2;
-    c.beginPath(); c.moveTo(0,yc);
-    for(let x=0;x<=L.w;x+=24){ c.lineTo(x, yc+Math.sin(x/wl*Math.PI*2+ph)*amp); }
-    c.lineTo(L.w,yc+260); c.lineTo(0,yc+260); c.closePath();
-    c.fillStyle = forest? 'rgba(120,96,52,.10)' : 'rgba(180,135,80,.16)';
-    c.fill();
+    const amp = 50+r()*120, wl = 340+r()*460, ph=r()*Math.PI*2;
+    const yat = x=> yc+Math.sin(x/wl*Math.PI*2+ph)*amp;
+    // soft body shadow on the lee side
+    c.beginPath(); c.moveTo(0,yat(0));
+    for(let x=0;x<=L.w;x+=22){ c.lineTo(x, yat(x)); }
+    c.lineTo(L.w,yat(L.w)+220); c.lineTo(0,yat(0)+220); c.closePath();
+    c.fillStyle = forest? 'rgba(95,76,40,.12)' : 'rgba(150,110,66,.16)'; c.fill();
+    // trough shadow (just under crest line)
+    c.beginPath(); c.moveTo(0,yat(0));
+    for(let x=0;x<=L.w;x+=22){ c.lineTo(x, yat(x)); }
+    c.strokeStyle='rgba(70,50,28,.10)'; c.lineWidth=10; c.stroke();
     // crest highlight
-    c.beginPath(); c.moveTo(0,yc);
-    for(let x=0;x<=L.w;x+=24){ c.lineTo(x, yc+Math.sin(x/wl*Math.PI*2+ph)*amp); }
-    c.strokeStyle = forest? 'rgba(255,240,200,.10)' : 'rgba(255,245,220,.22)'; c.lineWidth=3; c.stroke();
+    c.beginPath(); c.moveTo(0,yat(0)-3);
+    for(let x=0;x<=L.w;x+=22){ c.lineTo(x, yat(x)-3); }
+    c.strokeStyle = forest? 'rgba(255,242,205,.12)' : 'rgba(255,246,222,.24)'; c.lineWidth=2.5; c.stroke();
   }
   // wind ripples (short arcs)
-  c.strokeStyle = forest?'rgba(110,90,50,.10)':'rgba(165,125,75,.18)'; c.lineWidth=1.4;
-  for(let i=0;i<L.w*L.h/9000;i++){
-    const x=r()*L.w, y=r()*L.h, w=10+r()*22;
-    c.beginPath(); c.arc(x,y,w,Math.PI*1.05,Math.PI*1.95); c.stroke();
+  c.strokeStyle = forest?'rgba(105,86,46,.11)':'rgba(160,120,72,.18)'; c.lineWidth=1.3;
+  for(let i=0;i<L.w*L.h/7000;i++){
+    const x=r()*L.w, y=r()*L.h, w=10+r()*24, a=r()*0.6;
+    c.beginPath(); c.arc(x,y,w,Math.PI*1.05+a,Math.PI*1.95+a); c.stroke();
+  }
+  // cracks in the soil (thin branching lines)
+  c.strokeStyle = forest?'rgba(80,60,34,.20)':'rgba(120,86,52,.16)';
+  for(let i=0;i<L.w*L.h/120000;i++){
+    let x=r()*L.w, y=r()*L.h, a=r()*Math.PI*2;
+    c.lineWidth=1.1; c.beginPath(); c.moveTo(x,y);
+    const seg=3+(r()*3|0);
+    for(let s=0;s<seg;s++){ a+=(r()-0.5)*1.2; x+=Math.cos(a)*(14+r()*18); y+=Math.sin(a)*(14+r()*18); c.lineTo(x,y); }
+    c.stroke();
+  }
+  // scattered pebbles (small stones)
+  for(let i=0;i<L.w*L.h/2600;i++){
+    const x=r()*L.w, y=r()*L.h, s=1+r()*2.4;
+    c.fillStyle = r()>0.5? 'rgba(120,108,92,.5)':'rgba(90,78,62,.45)';
+    c.beginPath(); c.ellipse(x,y,s,s*0.8,0,0,7); c.fill();
+    c.fillStyle='rgba(255,250,235,.18)'; c.beginPath(); c.ellipse(x-s*0.3,y-s*0.3,s*0.4,s*0.3,0,0,7); c.fill();
   }
   // sand grain speckle
-  for(let i=0;i<L.w*L.h/520;i++){
+  for(let i=0;i<L.w*L.h/360;i++){
     const x=r()*L.w, y=r()*L.h;
-    c.fillStyle = r()>0.5 ? 'rgba(255,240,210,.14)' : 'rgba(110,80,45,.10)';
-    c.fillRect(x,y,1.6,1.6);
+    c.fillStyle = r()>0.5 ? 'rgba(255,242,214,.14)' : 'rgba(110,80,45,.10)';
+    c.fillRect(x,y,1.5,1.5);
   }
-  // forest: greenish grass tufts patches baked subtly
+  // forest: dry-grass patches + greener mottling + cracked clay
   if(forest){
-    for(let i=0;i<L.w*L.h/40000;i++){
+    for(let i=0;i<L.w*L.h/14000;i++){
       const x=r()*L.w,y=r()*L.h;
-      c.fillStyle='rgba(120,140,70,.12)';
-      c.beginPath(); c.ellipse(x,y,40+r()*40,26+r()*20,0,0,7); c.fill();
+      c.fillStyle = r()>0.5? 'rgba(120,140,70,.13)' : 'rgba(150,120,60,.12)';
+      c.beginPath(); c.ellipse(x,y,40+r()*48,26+r()*24,r(),0,7); c.fill();
     }
+    c.strokeStyle='rgba(150,140,80,.28)'; c.lineWidth=1;
+    for(let i=0;i<L.w*L.h/2200;i++){ const x=r()*L.w,y=r()*L.h,h=3+r()*5;
+      c.beginPath(); c.moveTo(x,y); c.lineTo(x+(r()-0.5)*3,y-h); c.stroke(); }
   }
+  // borde de la zona: todo lo que queda FUERA del polígono se pinta intransitable
+  if(L.shape){
+    const poly=L.shape;
+    const tracePoly=()=>{ c.moveTo(poly[0][0],poly[0][1]); for(let i=1;i<poly.length;i++) c.lineTo(poly[i][0],poly[i][1]); c.closePath(); };
+    // relleno exterior (rect + polígono con evenodd => anillo exterior)
+    c.save();
+    c.beginPath(); c.rect(0,0,L.w,L.h); tracePoly();
+    c.fillStyle = forest? 'rgba(22,30,18,0.94)' : 'rgba(54,38,22,0.92)';
+    c.fill('evenodd');
+    // motas oscuras en el exterior (matorral / roca densa)
+    for(let i=0;i<L.w*L.h/9000;i++){ const x=r()*L.w, y=r()*L.h;
+      if(pointInPoly(poly,x,y)) continue;
+      c.fillStyle= forest? 'rgba(12,20,10,0.5)':'rgba(34,22,12,0.5)';
+      c.beginPath(); c.arc(x,y,4+r()*10,0,7); c.fill(); }
+    // sombra de "acantilado" hacia adentro del borde
+    c.beginPath(); tracePoly(); c.strokeStyle='rgba(0,0,0,0.34)'; c.lineWidth=30; c.stroke();
+    c.beginPath(); tracePoly(); c.strokeStyle= forest?'rgba(38,28,16,0.7)':'rgba(96,68,38,0.7)'; c.lineWidth=9; c.stroke();
+    c.restore();
+  }
+  // charcas de tierra profunda (lodo): se hornean en el suelo y ralentizan al pisarlas
+  G.mud=[];
+  const mudN = forest? 11 : 9;
+  let mt=0;
+  while(G.mud.length<mudN && mt<mudN*40){
+    mt++;
+    const mx=120+r()*(L.w-240), my=120+r()*(L.h-240);
+    if(dist(mx,my,L.start.x,L.start.y)<260) continue;
+    if(dist(mx,my,L.serfor.x,L.serfor.y)<260) continue;
+    let bad=false; for(const o of G.objects){ if(dist(mx,my,o.x,o.y)<140){bad=true;break;} }
+    if(bad) continue;
+    G.mud.push({x:mx,y:my,r:48+r()*46});
+  }
+  for(const mp of G.mud) drawMudPatch(c, mp.x, mp.y, mp.r, r, forest);
   G.ground=g;
 }
 
@@ -652,13 +839,14 @@ function buildDecor(L){
     return true;
   }
   const counts = forest
-    ? {bush:40, rock:18, alive:26, dead:14, grass:55}
-    : {bush:34, rock:26, alive:9,  dead:18, grass:0};
+    ? {bush:60, rock:26, alive:36, dead:22, grass:100}
+    : {bush:52, rock:38, alive:14, dead:28, grass:24};
   function place(kind, n, minSelf){
     let tries=0, made=0;
     while(made<n && tries<n*30){
       tries++;
       const x=60+r()*(L.w-120), y=60+r()*(L.h-120);
+      if(L.shape && !pointInPoly(L.shape,x,y)) continue;   // dentro de la zona
       if(!farFromTargets(x,y,150)) continue;
       let ok=true;
       for(const it of items){ if(it.kind===kind && dist(x,y,it.x,it.y)<minSelf){ok=false;break;} }
@@ -667,12 +855,19 @@ function buildDecor(L){
       made++;
     }
   }
-  place('rock', counts.rock, 90);
-  place('bush', counts.bush, 70);
-  place('dead', counts.dead, 130);
-  place('alive', counts.alive, 170);
-  if(counts.grass) place('grass', counts.grass, 50);
+  place('rock', counts.rock, 80);
+  place('bush', counts.bush, 60);
+  place('dead', counts.dead, 110);
+  place('alive', counts.alive, 150);
+  if(counts.grass) place('grass', counts.grass, 44);
   G.decor=items;
+  // colisiones: rocas y troncos de árboles son obstáculos sólidos
+  G.colliders=[];
+  for(const it of items){
+    if(it.kind==='rock') G.colliders.push({x:it.x, y:it.y, r:14*it.s});
+    else if(it.kind==='alive') G.colliders.push({x:it.x, y:it.y, r:13*it.s});
+    else if(it.kind==='dead') G.colliders.push({x:it.x, y:it.y, r:9*it.s});
+  }
 }
 
 /* ============================================================
@@ -680,6 +875,15 @@ function buildDecor(L){
    ============================================================ */
 function clamp(v,a,b){return v<a?a:v>b?b:v;}
 function dist(x1,y1,x2,y2){const dx=x1-x2,dy=y1-y2;return Math.sqrt(dx*dx+dy*dy);}
+function pointInPoly(poly,x,y){
+  let inside=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+    const xi=poly[i][0],yi=poly[i][1], xj=poly[j][0],yj=poly[j][1];
+    if(((yi>y)!==(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+function inShape(L,x,y){ return !L || !L.shape || pointInPoly(L.shape,x,y); }
 function lerp(a,b,t){return a+(b-a)*t;}
 
 /* ============================================================
@@ -715,6 +919,25 @@ function drawRock(x,y,s,seed){
   ctx.fillStyle='rgba(255,255,255,.18)'; ctx.beginPath();
   ctx.moveTo(pts[0][0],pts[0][1]); ctx.lineTo(pts[1][0],pts[1][1]); ctx.lineTo(x,y-2*s); ctx.closePath(); ctx.fill();
   ctx.strokeStyle='rgba(50,40,30,.35)'; ctx.lineWidth=1; ctx.stroke();
+}
+/* charca de tierra profunda (lodo): se "hornea" en el suelo y te ralentiza */
+function drawMudPatch(c,x,y,rad,r,forest){
+  // varias manchas suaves y desplazadas => silueta orgánica, todo difuminado
+  for(let i=0;i<9;i++){
+    const a=r()*Math.PI*2, dd=r()*rad*0.55;
+    const gx=x+Math.cos(a)*dd, gy=y+Math.sin(a)*dd, rr=rad*(0.42+r()*0.55);
+    const g=c.createRadialGradient(gx,gy,rr*0.12, gx,gy,rr);
+    g.addColorStop(0,'rgba(40,28,17,0.80)');
+    g.addColorStop(0.55,'rgba(56,40,24,0.5)');
+    g.addColorStop(1,'rgba(56,40,24,0)');
+    c.fillStyle=g; c.beginPath(); c.arc(gx,gy,rr,0,7); c.fill();
+  }
+  // núcleo húmedo muy difuso (sin contorno)
+  const sh=c.createRadialGradient(x-rad*0.18,y-rad*0.18,1, x,y,rad*0.7);
+  sh.addColorStop(0,'rgba(120,140,138,0.15)');
+  sh.addColorStop(0.5,'rgba(60,66,64,0.05)');
+  sh.addColorStop(1,'rgba(0,0,0,0)');
+  c.fillStyle=sh; c.beginPath(); c.arc(x,y,rad*0.7,0,7); c.fill();
 }
 function drawAlgarroboAlive(x,y,s,seed){
   const r=mulberry32(seed|0);
@@ -882,29 +1105,143 @@ function s_(){return 1;}
 function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 
 function highlight(x,y,rad,active){
-  // subtle marker by default; bright pulsing ring when in reach
+  // solo se marca cuando estás lo bastante cerca para recogerla
+  if(!active) return;
   const t=(Math.sin(G.time*5)*0.5+0.5);
   ctx.save();
-  if(active){ ctx.strokeStyle='rgba(127,232,192,'+(0.5+0.4*t)+')'; ctx.lineWidth=2.5;
-    ctx.beginPath(); ctx.arc(x,y,rad+6+t*5,0,7); ctx.stroke(); }
-  else { ctx.strokeStyle='rgba(127,232,192,'+(0.10+0.06*t)+')'; ctx.lineWidth=1.5;
-    ctx.beginPath(); ctx.arc(x,y,rad+4,0,7); ctx.stroke(); }
+  ctx.strokeStyle='rgba(127,232,192,'+(0.5+0.4*t)+')'; ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.arc(x,y,rad+6+t*5,0,7); ctx.stroke();
   ctx.restore();
+}
+
+/* ---------- animales (peligro) ---------- */
+function buildAnimals(L){
+  const r=mulberry32(L.seed*29+7);
+  const cfg=ASSETS.animals||{}; const types=cfg.types||[];
+  let n=(cfg.count||0); if(L.biome==='forest') n+=3;     // más animales en el bosque
+  if(!types.length) n=0;
+  const totalW=types.reduce((s,t)=>s+(t.weight||1),0);
+  function pickType(){ let x=r()*totalW; for(const t of types){ x-=(t.weight||1); if(x<=0) return t; } return types[types.length-1]; }
+  G.animals=[]; let tries=0;
+  while(G.animals.length<n && tries<n*40){
+    tries++;
+    const x=120+r()*(L.w-240), y=120+r()*(L.h-240);
+    if(L.shape && !pointInPoly(L.shape,x,y)) continue;
+    if(dist(x,y,L.start.x,L.start.y)<360) continue;
+    if(dist(x,y,G.serfor.x,G.serfor.y)<300) continue;
+    let near=false; for(const o of G.objects){ if(dist(x,y,o.x,o.y)<150){near=true;break;} }
+    if(near) continue;
+    G.animals.push({x,y,dir:'right',wander:0,wdir:r()*Math.PI*2,flee:0,t:r()*10,type:pickType()});
+  }
+}
+function updateAnimals(dt){
+  const p=G.player, L=G.level;
+  const stunned = G.time < G.stunUntil;
+  for(const a of G.animals){
+    a.t+=dt; const tp=a.type; if(!tp) continue;
+    const dp=dist(a.x,a.y,p.x,p.y); const sight=tp.sight||240;
+    let tx, ty, sp;
+    if(a.flee>0){ a.flee-=dt; tx=a.x+(a.x-p.x); ty=a.y+(a.y-p.y); sp=tp.speed*1.3; }
+    else if(dp<sight && !stunned){ tx=p.x; ty=p.y; sp=tp.speed; }                 // persigue
+    else { a.wander-=dt; if(a.wander<=0){ a.wander=0.8+Math.random()*1.6; a.wdir=Math.random()*Math.PI*2; }
+           tx=a.x+Math.cos(a.wdir)*100; ty=a.y+Math.sin(a.wdir)*100; sp=tp.speed*0.5; }
+    const ang=Math.atan2(ty-a.y, tx-a.x);
+    const nax=clamp(a.x+Math.cos(ang)*sp*dt, 30, L.w-30);
+    const nay=clamp(a.y+Math.sin(ang)*sp*dt, 30, L.h-30);
+    if(!L.shape || inShape(L,nax,nay)){ a.x=nax; a.y=nay; }
+    else { a.wander=0; a.wdir=Math.atan2(a.y-ty, a.x-tx)+ (Math.random()-0.5); }  // rebota al borde
+    a.dir = Math.abs(Math.cos(ang))>Math.abs(Math.sin(ang)) ? (Math.cos(ang)>0?'right':'left') : (Math.sin(ang)>0?'down':'up');
+    if(!stunned && G.time>G.invulnUntil && dp<(tp.reach||26)){
+      const stun=tp.stun||2.4;
+      G.stunUntil=G.time+stun; G.invulnUntil=G.time+stun+1.2; a.flee=stun*0.9; onStun(tp);
+    }
+  }
+}
+function onStun(tp){
+  beep(120,0.4,0.06,'sawtooth'); setTimeout(()=>beep(90,0.5,0.05,'sawtooth'),130);
+  const name=(tp&&tp.name)?tp.name:'animal';
+  const s=document.getElementById('stun'); const txt=s.querySelector('.txt');
+  if(txt) txt.textContent='¡Un '+name+' te atrapó!';
+  s.classList.add('show'); clearTimeout(s._t);
+  s._t=setTimeout(()=>s.classList.remove('show'), ((tp&&tp.stun)?tp.stun:2.4)*1000);
+  guideSay('¡Cuidado con la fauna! El '+name+' te dejó fuera de juego unos segundos.', 4000);
+}
+function drawAnimal(a){
+  const tp=a.type||{};
+  if(tp.img && tp.img.loaded){ blitSprite(tp.img, a.x, a.y, tp.height||42, tp.anchorY||0.62); return; }
+  if(tp.draw==='boar') drawBoar(a);
+  else if(tp.draw==='dog') drawDog(a);
+  else drawFox(a);
+}
+function drawFox(a){
+  const x=a.x,y=a.y, wob=Math.sin(a.t*9)*1.3; const flip=a.dir==='left'?-1:1;
+  drawShadow(x,y+6,15,6);
+  ctx.save(); ctx.translate(x,y); ctx.scale(flip,1);
+  ctx.strokeStyle='#7a5230'; ctx.lineWidth=4; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(-10,2); ctx.quadraticCurveTo(-19,-2,-16,-9); ctx.stroke();   // cola
+  ctx.fillStyle='#a86a32'; ctx.beginPath(); ctx.ellipse(0,0,12,8,0,0,7); ctx.fill();        // cuerpo
+  ctx.fillStyle='#bb7a3c'; ctx.beginPath(); ctx.arc(9,-1,6,0,7); ctx.fill();                // cabeza
+  ctx.fillStyle='#7a4a24';
+  ctx.beginPath(); ctx.moveTo(6,-6); ctx.lineTo(8,-12); ctx.lineTo(11,-6); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(11,-6); ctx.lineTo(13,-12); ctx.lineTo(15,-6); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='#2e2218'; ctx.beginPath(); ctx.arc(14.5,-1,1.5,0,7); ctx.fill();
+  ctx.fillStyle='#241a12'; ctx.beginPath(); ctx.arc(10,-3,1.1,0,7); ctx.fill();
+  ctx.fillStyle='#7a4a24'; ctx.fillRect(-6,6,3,4+(wob>0?wob:0)); ctx.fillRect(4,6,3,4+(wob<0?-wob:0));
+  ctx.restore();
+}
+function drawBoar(a){          // sajino: lento, pesado
+  const x=a.x,y=a.y, wob=Math.sin(a.t*6)*1.1; const flip=a.dir==='left'?-1:1;
+  drawShadow(x,y+8,19,7);
+  ctx.save(); ctx.translate(x,y); ctx.scale(flip,1);
+  ctx.fillStyle='#574636'; ctx.beginPath(); ctx.ellipse(0,0,15,10,0,0,7); ctx.fill();   // cuerpo robusto
+  ctx.strokeStyle='#352a20'; ctx.lineWidth=1.4;                                          // cerdas del lomo
+  for(let i=-9;i<=4;i+=3){ ctx.beginPath(); ctx.moveTo(i,-9); ctx.lineTo(i+1,-13); ctx.stroke(); }
+  ctx.fillStyle='#6b5444'; ctx.beginPath(); ctx.arc(12,1,7,0,7); ctx.fill();             // cabeza
+  ctx.fillStyle='#3f3024'; ctx.beginPath(); ctx.ellipse(18,2,4,3,0,0,7); ctx.fill();     // hocico
+  ctx.fillStyle='#ece3cf'; ctx.beginPath(); ctx.moveTo(17,4); ctx.lineTo(19.5,7); ctx.lineTo(20,4); ctx.closePath(); ctx.fill(); // colmillo
+  ctx.fillStyle='#352a20'; ctx.beginPath(); ctx.moveTo(8,-6); ctx.lineTo(10,-11); ctx.lineTo(13,-7); ctx.closePath(); ctx.fill(); // oreja
+  ctx.fillStyle='#160f0a'; ctx.beginPath(); ctx.arc(13,-2,1.3,0,7); ctx.fill();          // ojo
+  ctx.fillStyle='#352a20'; ctx.fillRect(-8,8,3.4,4+(wob>0?wob:0)); ctx.fillRect(6,8,3.4,4+(wob<0?-wob:0));
+  ctx.strokeStyle='#352a20'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(-14,-2); ctx.lineTo(-17,-5); ctx.stroke();
+  ctx.restore();
+}
+function drawDog(a){           // perro cimarrón: rápido, esbelto
+  const x=a.x,y=a.y, wob=Math.sin(a.t*13)*1.7; const flip=a.dir==='left'?-1:1;
+  drawShadow(x,y+6,15,6);
+  ctx.save(); ctx.translate(x,y); ctx.scale(flip,1);
+  ctx.strokeStyle='#8a8475'; ctx.lineWidth=4; ctx.lineCap='round';                       // cola levantada
+  ctx.beginPath(); ctx.moveTo(-10,0); ctx.quadraticCurveTo(-17,-7,-13,-12); ctx.stroke();
+  ctx.fillStyle='#9a9182'; ctx.beginPath(); ctx.ellipse(0,0,12,6.5,0,0,7); ctx.fill();    // cuerpo esbelto
+  ctx.fillStyle='#a8a092'; ctx.beginPath(); ctx.arc(10,-1,5.5,0,7); ctx.fill();           // cabeza
+  ctx.fillStyle='#6f685b';
+  ctx.beginPath(); ctx.moveTo(7,-5); ctx.lineTo(8,-11); ctx.lineTo(11,-6); ctx.closePath(); ctx.fill();   // orejas
+  ctx.beginPath(); ctx.moveTo(11,-6); ctx.lineTo(13,-11); ctx.lineTo(14,-5); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='#5a5347'; ctx.beginPath(); ctx.ellipse(15,0,3,2.2,0,0,7); ctx.fill();    // hocico
+  ctx.fillStyle='#160f0a'; ctx.beginPath(); ctx.arc(11,-2,1.1,0,7); ctx.fill();           // ojo
+  ctx.fillStyle='#6f685b'; ctx.fillRect(-6,6,2.6,6+(wob>0?wob:0)); ctx.fillRect(5,6,2.6,6+(wob<0?-wob:0)); // patas largas
+  ctx.restore();
+}
+function drawStunStars(x,y){
+  const yy=y-46;
+  ctx.fillStyle='#ffd84a'; ctx.font='15px serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  for(let i=0;i<3;i++){ const a=G.time*4 + i/3*Math.PI*2; ctx.fillText('✦', x+Math.cos(a)*13, yy+Math.sin(a)*5); }
+  ctx.textAlign='left'; ctx.textBaseline='alphabetic';
 }
 
 /* ---------- Mateo (top-down) ---------- */
 function drawMateo(x,y,dir,walk,moving){
   const _cfg=ASSETS.mateo, _frames=(SPR.mateo&&SPR.mateo[dir])||[];
+  const S=(_cfg.scale||1);
   if(spriteReady(_frames)){
     const f=pickFrame(_frames,moving,_cfg.fps);
     const b=moving?Math.sin(G.time*(_cfg.fps||8))*1.6:0;
-    blitSprite(f,x,y,_cfg.height,_cfg.anchorY,b);
+    blitSprite(f,x,y,_cfg.height*S,_cfg.anchorY,b);
     return;
   }
   const bob=Math.sin(walk)*1.4;
   const leg=Math.sin(walk)*4;
-  drawShadow(x,y+14,13,5);
-  ctx.save(); ctx.translate(x,y+bob);
+  drawShadow(x,y+14*S,13*S,5*S);
+  ctx.save(); ctx.translate(x,y+bob); ctx.scale(S,S);
   const side = dir==='left'||dir==='right';
   const back = dir==='up';
   const flip = dir==='left'?-1:1;
@@ -1043,12 +1380,14 @@ function tryInteract(){
   if(!interactTarget) return;
   if(interactTarget.kind==='obj'){
     const o=interactTarget.obj; o.got=true; G.collected++;
+    if(!G.log.includes(o.type)) G.log.push(o.type);
     chime(); updateHUD(); showQuote(o.type);
     document.getElementById('prompt').style.display='none';
     G.guideIdle=0;
     const remaining=G.objects.filter(x=>!x.got);
     if(remaining.length>=1) guideSay('¡Bien hecho! Te falta '+INFO[remaining[0].type].title.toLowerCase()+'. Sigue la señal del radar.', 7000);
-    else guideSay('¡Tienes las 2 pruebas! Vuelve al puesto SERFOR y entrégalas.', 8000);
+    else { guideSay('¡Tienes las 2 pruebas! Vuelve al puesto SERFOR y entrégalas.', 8000);
+      showTaskToast('Vuelve al puesto SERFOR a entregar las pruebas', 5000); }
   } else {
     fanfare(); levelComplete();
   }
@@ -1093,6 +1432,44 @@ const TIPS=[
   'No pierdas el rastro de arrastre; te lleva directo a la evidencia.',
   'Si te desorientas, guíate por la señal del radar de arriba a la derecha.',
 ];
+
+/* ---------- cartel de tarea (se elimina con el tiempo) ---------- */
+function showTaskToast(text, ms){
+  const el=document.getElementById('taskToast');
+  if(text) document.getElementById('taskToastText').textContent=text;
+  void el.offsetWidth; el.classList.add('show');
+  clearTimeout(el._t); el._t=setTimeout(()=>el.classList.remove('show'), ms||4500);
+}
+
+/* ---------- ajustes de sonido ---------- */
+const toolsEl=document.getElementById('tools');
+const settingsEl=document.getElementById('settings');
+document.getElementById('btnSettings').addEventListener('click',()=>{ ensureAudio(); settingsEl.classList.toggle('hide'); });
+function setSwitch(el,on){ el.classList.toggle('on',on); el.setAttribute('aria-checked', on?'true':'false'); }
+document.getElementById('swMusic').addEventListener('click',function(){ musicOn=!musicOn; setSwitch(this,musicOn); if(musicOn){ setupMusic(); playMusic(); } else pauseMusic(); });
+document.getElementById('swSfx').addEventListener('click',function(){ sfxOn=!sfxOn; setSwitch(this,sfxOn); if(sfxOn) beep(660,0.08,0.05,'square'); });
+document.getElementById('volMusic').addEventListener('input',function(){ const v=this.value/100; if(ASSETS.music) ASSETS.music.volume=v; if(bgMusic) bgMusic.volume=v; });
+
+/* ---------- expediente de pruebas (todo lo obtenido) ---------- */
+const COL_ORDER=['log','pods','chainsaw','charcoal','deadtree','tracks'];
+function renderCollection(){
+  const grid=document.getElementById('colGrid'); grid.innerHTML='';
+  for(const ty of COL_ORDER){
+    const got=G.log.includes(ty); const info=INFO[ty];
+    const div=document.createElement('div'); div.className='colItem'+(got?' got':'');
+    div.innerHTML = got
+      ? '<div class="colIcon">'+iconHTML(ty)+'</div><div class="colName">'+info.title+'</div><div class="colTxt">'+info.text+'</div>'
+      : '<div class="colIcon">🔒</div><div class="colName">Prueba sin recuperar</div><div class="colTxt">Encuéntrala con el radar para añadirla al expediente.</div>';
+    grid.appendChild(div);
+  }
+}
+function openCollection(){
+  if(G.state!=='play') return;
+  G.state='collection'; settingsEl.classList.add('hide');
+  renderCollection(); show('collection');
+}
+document.getElementById('btnCollection').addEventListener('click', openCollection);
+document.getElementById('btnColClose').addEventListener('click',()=>{ hide('collection'); G.state='play'; });
 
 /* ---------- historia final (epílogo) ---------- */
 function showOutro(){
@@ -1169,7 +1546,7 @@ document.getElementById('btnStoryGo').addEventListener('click',()=>{ ensureAudio
 document.getElementById('btnStoryBack').addEventListener('click',()=>{ hide('story'); G.state='menu'; show('menu'); });
 document.getElementById('btnMenu').addEventListener('click',()=>{ hide('endscreen'); G.state='menu'; show('menu'); });
 
-function startGame(){ buildLevel(0); G.state='play'; showMobile(isTouch()); }
+function startGame(){ G.log=[]; buildLevel(0); G.state='play'; showMobile(isTouch()); }
 
 /* ============================================================
    UPDATE + RENDER LOOP
@@ -1180,19 +1557,37 @@ function update(dt){
   let dx=(move.right?1:0)-(move.left?1:0);
   let dy=(move.down?1:0)-(move.up?1:0);
   if(dx&&dy){ const n=Math.SQRT1_2; dx*=n; dy*=n; }
+  const stunned = G.time < G.stunUntil;
+  if(stunned){ dx=0; dy=0; }
   p.moving = !!(dx||dy);
   if(dx>0) p.dir='right'; else if(dx<0) p.dir='left'; else if(dy>0) p.dir='down'; else if(dy<0) p.dir='up';
-  p.x = clamp(p.x + dx*spd*dt, 20, L.w-20);
-  p.y = clamp(p.y + dy*spd*dt, 30, L.h-20);
+  // movimiento con colisiones (eje por eje => permite deslizarse junto a obstáculos)
+  const pr = 13*(ASSETS.mateo.scale||1);
+  // ralentización al pisar una charca de tierra profunda
+  let spdMul=1;
+  for(const mp of G.mud){ if(dist(p.x,p.y,mp.x,mp.y)<mp.r){ spdMul=0.4; break; } }
+  const sp=spd*spdMul;
+  let nx = clamp(p.x + dx*sp*dt, 20, L.w-20);
+  for(const o of G.colliders){ const rr=o.r+pr, ady=p.y-o.y;
+    if(Math.abs(ady)<rr){ const adx=nx-o.x;
+      if(adx*adx+ady*ady < rr*rr){ const allow=Math.sqrt(Math.max(0,rr*rr-ady*ady)); nx=o.x+(adx>=0?allow:-allow); } } }
+  if(L.shape && !inShape(L,nx,p.y)) nx=p.x;          // no salir de la zona
+  p.x = nx;
+  let ny = clamp(p.y + dy*sp*dt, 30, L.h-20);
+  for(const o of G.colliders){ const rr=o.r+pr, adx=p.x-o.x;
+    if(Math.abs(adx)<rr){ const ady=ny-o.y;
+      if(adx*adx+ady*ady < rr*rr){ const allow=Math.sqrt(Math.max(0,rr*rr-adx*adx)); ny=o.y+(ady>=0?allow:-allow); } } }
+  if(L.shape && !inShape(L,p.x,ny)) ny=p.y;          // no salir de la zona
+  p.y = ny;
   if(p.moving) p.walk += dt*12; else p.walk*=0.8;
   // camera smooth follow
   const tx = clamp(p.x - VW/2, 0, Math.max(0,L.w-VW));
   const ty = clamp(p.y - VH/2, 0, Math.max(0,L.h-VH));
   G.cam.x = lerp(G.cam.x, tx, Math.min(1, dt*6));
   G.cam.y = lerp(G.cam.y, ty, Math.min(1, dt*6));
-  // radar proximity & beeping
+  // radar proximity & beeping (alcance más corto => más difícil de hallar)
   const {t,d}=nearestTarget();
-  const maxR=900; const prox=clamp(1 - d/maxR, 0, 1);
+  const maxR=600; const prox=clamp(1 - d/maxR, 0, 1);
   // pulse speed scales with proximity
   const pulseSpeed = lerp(3.5, 26, prox*prox);
   G.pulsePhase += pulseSpeed*dt;
@@ -1206,6 +1601,8 @@ function update(dt){
   // radar draw
   const bearing=Math.atan2(t.y-p.y, t.x-p.x);
   drawRadar(prox, bearing, !!t.isPost);
+  // animales
+  updateAnimals(dt);
   // guía: consejo ocasional si llevas rato sin recoger nada
   G.guideIdle += dt;
   if(G.guideIdle>24 && G.objects.some(o=>!o.got)){ G.guideIdle=0; guideSay(TIPS[(G.tipi++)%TIPS.length], 6500); }
@@ -1233,6 +1630,7 @@ function render(){
   const list=[];
   for(const it of G.decor){ list.push(it); }
   for(const o of G.objects){ if(!o.got) list.push({kind:'obj',x:o.x,y:o.y,obj:o}); }
+  for(const a of G.animals){ list.push({kind:'animal',x:a.x,y:a.y,a:a}); }
   list.push({kind:'serfor',x:G.serfor.x,y:G.serfor.y});
   list.push({kind:'player',x:G.player.x,y:G.player.y});
   list.sort((a,b)=>a.y-b.y);
@@ -1252,7 +1650,10 @@ function render(){
           blitSprite(SPR.serfor, it.x, it.y, c.height, c.anchorY);
         } else drawSerfor(it.x,it.y);
         break;
-      case 'player': drawMateo(it.x,it.y,G.player.dir,G.player.walk,G.player.moving); break;
+      case 'animal': drawAnimal(it.a); break;
+      case 'player': drawMateo(it.x,it.y,G.player.dir,G.player.walk,G.player.moving);
+        if(G.time<G.stunUntil) drawStunStars(it.x,it.y);
+        break;
       case 'obj': {
         const ty=it.obj.type;
         const hl=(interactTarget&&interactTarget.kind==='obj'&&interactTarget.obj===it.obj)?true:false;
@@ -1290,6 +1691,7 @@ function render(){
   const vg=ctx.createRadialGradient(VW/2,VH/2,Math.min(VW,VH)*0.35, VW/2,VH/2,Math.max(VW,VH)*0.75);
   vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(20,12,6,.34)');
   ctx.fillStyle=vg; ctx.fillRect(0,0,VW,VH);
+  if(G.time<G.stunUntil){ ctx.fillStyle='rgba(70,16,12,'+(0.22+0.1*Math.sin(G.time*10))+')'; ctx.fillRect(0,0,VW,VH); }
   ctx.restore();
 }
 
@@ -1299,6 +1701,8 @@ function loop(ts){
   if(dt>0.05) dt=0.05;
   G.time+=dt;
   if(guideEl) guideEl.classList.toggle('on', G.state==='play'||G.state==='quote');
+  if(toolsEl) toolsEl.classList.toggle('on', G.state==='play');
+  if(G.state!=='play' && settingsEl) settingsEl.classList.add('hide');
   update(dt);
   render();
   requestAnimationFrame(loop);
